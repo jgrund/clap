@@ -47,10 +47,27 @@ set edit:completion:arg-completer[my-app] = {|@words|
             cand --version 'Print version'
         }
         &'my-app;some-cmd-with-hyphens'= {
+            cand --verbose 'verbose'
             cand -h 'Print help'
             cand --help 'Print help'
             cand -V 'Print version'
             cand --version 'Print version'
+            cand some-nested-hidden-cmd 'some-nested-hidden-cmd'
+            cand help 'Print this message or the help of the given subcommand(s)'
+        }
+        &'my-app;some-cmd-with-hyphens;some-nested-hidden-cmd'= {
+            cand -h 'Print help'
+            cand --help 'Print help'
+            cand -V 'Print version'
+            cand --version 'Print version'
+        }
+        &'my-app;some-cmd-with-hyphens;help'= {
+            cand some-nested-hidden-cmd 'some-nested-hidden-cmd'
+            cand help 'Print this message or the help of the given subcommand(s)'
+        }
+        &'my-app;some-cmd-with-hyphens;help;some-nested-hidden-cmd'= {
+        }
+        &'my-app;some-cmd-with-hyphens;help;help'= {
         }
         &'my-app;some-hidden-cmd'= {
             cand -h 'Print help'
@@ -70,6 +87,9 @@ set edit:completion:arg-completer[my-app] = {|@words|
         &'my-app;help;some_cmd'= {
         }
         &'my-app;help;some-cmd-with-hyphens'= {
+            cand some-nested-hidden-cmd 'some-nested-hidden-cmd'
+        }
+        &'my-app;help;some-cmd-with-hyphens;some-nested-hidden-cmd'= {
         }
         &'my-app;help;some-hidden-cmd'= {
         }

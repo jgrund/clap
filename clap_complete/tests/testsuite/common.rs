@@ -71,7 +71,22 @@ pub(crate) fn special_commands_command(name: &'static str) -> clap::Command {
                 )
                 .arg(clap::Arg::new("path").num_args(1..)),
         )
-        .subcommand(clap::Command::new("some-cmd-with-hyphens").alias("hyphen"))
+        .subcommand(
+            clap::Command::new("some-cmd-with-hyphens")
+                .alias("hyphen")
+                .arg(
+                    clap::Arg::new("verbose")
+                        .long("verbose")
+                        .hide(true)
+                        .action(clap::ArgAction::SetTrue),
+                )
+                .arg(
+                    clap::Arg::new("mode")
+                        .hide(true)
+                        .value_parser(["fast", "slow"]),
+                )
+                .subcommand(clap::Command::new("some-nested-hidden-cmd").hide(true)),
+        )
         .subcommand(clap::Command::new("some-hidden-cmd").hide(true))
 }
 

@@ -46,6 +46,21 @@ _my__app() {
             my__app__subcmd__help,test)
                 cmd="my__app__subcmd__help__subcmd__test"
                 ;;
+            my__app__subcmd__help__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens,some-nested-hidden-cmd)
+                cmd="my__app__subcmd__help__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__some__subcmd__nested__subcmd__hidden__subcmd__cmd"
+                ;;
+            my__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens,help)
+                cmd="my__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__help"
+                ;;
+            my__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens,some-nested-hidden-cmd)
+                cmd="my__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__some__subcmd__nested__subcmd__hidden__subcmd__cmd"
+                ;;
+            my__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__help,help)
+                cmd="my__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__help__subcmd__help"
+                ;;
+            my__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__help,some-nested-hidden-cmd)
+                cmd="my__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__help__subcmd__some__subcmd__nested__subcmd__hidden__subcmd__cmd"
+                ;;
             *)
                 ;;
         esac
@@ -95,8 +110,22 @@ _my__app() {
             return 0
             ;;
         my__subcmd__app__subcmd__help__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens)
-            opts=""
+            opts="some-nested-hidden-cmd"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        my__subcmd__app__subcmd__help__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__some__subcmd__nested__subcmd__hidden__subcmd__cmd)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 4 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi
@@ -151,8 +180,64 @@ _my__app() {
             return 0
             ;;
         my__subcmd__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens)
-            opts="-h -V --help --version"
+            opts="-h -V --verbose --help --version fast slow some-nested-hidden-cmd help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        my__subcmd__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__help)
+            opts="some-nested-hidden-cmd help"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        my__subcmd__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__help__subcmd__help)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 4 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        my__subcmd__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__help__subcmd__some__subcmd__nested__subcmd__hidden__subcmd__cmd)
+            opts=""
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 4 ]] ; then
+                COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+                return 0
+            fi
+            case "${prev}" in
+                *)
+                    COMPREPLY=()
+                    ;;
+            esac
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
+            return 0
+            ;;
+        my__subcmd__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__some__subcmd__nested__subcmd__hidden__subcmd__cmd)
+            opts="-h -V --help --version"
+            if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
             fi

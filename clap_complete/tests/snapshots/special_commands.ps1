@@ -53,10 +53,31 @@ Register-ArgumentCompleter -Native -CommandName 'my-app' -ScriptBlock {
             break
         }
         'my-app;some-cmd-with-hyphens' {
+            [CompletionResult]::new('--verbose', '--verbose', [CompletionResultType]::ParameterName, 'verbose')
             [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
             [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
             [CompletionResult]::new('-V', '-V ', [CompletionResultType]::ParameterName, 'Print version')
             [CompletionResult]::new('--version', '--version', [CompletionResultType]::ParameterName, 'Print version')
+            [CompletionResult]::new('some-nested-hidden-cmd', 'some-nested-hidden-cmd', [CompletionResultType]::ParameterValue, 'some-nested-hidden-cmd')
+            [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
+            break
+        }
+        'my-app;some-cmd-with-hyphens;some-nested-hidden-cmd' {
+            [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
+            [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
+            [CompletionResult]::new('-V', '-V ', [CompletionResultType]::ParameterName, 'Print version')
+            [CompletionResult]::new('--version', '--version', [CompletionResultType]::ParameterName, 'Print version')
+            break
+        }
+        'my-app;some-cmd-with-hyphens;help' {
+            [CompletionResult]::new('some-nested-hidden-cmd', 'some-nested-hidden-cmd', [CompletionResultType]::ParameterValue, 'some-nested-hidden-cmd')
+            [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
+            break
+        }
+        'my-app;some-cmd-with-hyphens;help;some-nested-hidden-cmd' {
+            break
+        }
+        'my-app;some-cmd-with-hyphens;help;help' {
             break
         }
         'my-app;some-hidden-cmd' {
@@ -81,6 +102,10 @@ Register-ArgumentCompleter -Native -CommandName 'my-app' -ScriptBlock {
             break
         }
         'my-app;help;some-cmd-with-hyphens' {
+            [CompletionResult]::new('some-nested-hidden-cmd', 'some-nested-hidden-cmd', [CompletionResultType]::ParameterValue, 'some-nested-hidden-cmd')
+            break
+        }
+        'my-app;help;some-cmd-with-hyphens;some-nested-hidden-cmd' {
             break
         }
         'my-app;help;some-hidden-cmd' {
