@@ -68,7 +68,7 @@ _my__app() {
 
     case "${cmd}" in
         my__app)
-            opts="-C -c -h -V --conf --config --help --version first second test some_cmd some-cmd-with-hyphens some-hidden-cmd help"
+            opts="-C -c -h -V --conf --config --help --version first second test some_cmd some-cmd-with-hyphens help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 1 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -82,7 +82,7 @@ _my__app() {
             return 0
             ;;
         my__subcmd__app__subcmd__help)
-            opts="test some_cmd some-cmd-with-hyphens some-hidden-cmd help"
+            opts="test some_cmd some-cmd-with-hyphens help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -110,7 +110,7 @@ _my__app() {
             return 0
             ;;
         my__subcmd__app__subcmd__help__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens)
-            opts="some-nested-hidden-cmd"
+            opts=""
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -180,7 +180,7 @@ _my__app() {
             return 0
             ;;
         my__subcmd__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens)
-            opts="-h -V --verbose --help --version fast slow some-nested-hidden-cmd help"
+            opts="-h -V --help --version help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -194,7 +194,7 @@ _my__app() {
             return 0
             ;;
         my__subcmd__app__subcmd__some__subcmd__cmd__subcmd__with__subcmd__hyphens__subcmd__help)
-            opts="some-nested-hidden-cmd help"
+            opts="help"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 3 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0
@@ -264,7 +264,7 @@ _my__app() {
             return 0
             ;;
         my__subcmd__app__subcmd__some_cmd)
-            opts="-h -V --config --help --version"
+            opts="-h -V --help --version"
             if [[ ${cur} == -* || ${COMP_CWORD} -eq 2 ]] ; then
                 COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )
                 return 0

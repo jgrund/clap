@@ -127,7 +127,7 @@ fn gen_fish_inner(
 
     debug!("gen_fish_inner: parent_commands={parent_commands:?}");
 
-    for option in cmd.get_opts() {
+    for option in cmd.get_opts().filter(|a| !a.is_hide_set()) {
         let mut template = basic_template.clone();
 
         if let Some(shorts) = option.get_short_and_visible_aliases() {
@@ -179,7 +179,7 @@ fn gen_fish_inner(
     if !has_positionals {
         basic_template.push_str(" -f");
     }
-    for subcommand in cmd.get_subcommands() {
+    for subcommand in cmd.get_subcommands().filter(|sc| !sc.is_hide_set()) {
         for subcommand_name in subcommand.get_name_and_visible_aliases() {
             let mut template = basic_template.clone();
 

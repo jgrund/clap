@@ -30,28 +30,21 @@ complete -c my-app -n "__fish_my_app_needs_command" -s V -l version -d 'Print ve
 complete -c my-app -n "__fish_my_app_needs_command" -a "test" -d 'tests things'
 complete -c my-app -n "__fish_my_app_needs_command" -a "some_cmd" -d 'tests other things'
 complete -c my-app -n "__fish_my_app_needs_command" -a "some-cmd-with-hyphens"
-complete -c my-app -n "__fish_my_app_needs_command" -a "some-hidden-cmd"
 complete -c my-app -n "__fish_my_app_needs_command" -a "help" -d 'Print this message or the help of the given subcommand(s)'
 complete -c my-app -n "__fish_my_app_using_subcommand test" -l case -d 'the case to test' -r
 complete -c my-app -n "__fish_my_app_using_subcommand test" -s h -l help -d 'Print help'
 complete -c my-app -n "__fish_my_app_using_subcommand test" -s V -l version -d 'Print version'
-complete -c my-app -n "__fish_my_app_using_subcommand some_cmd" -l config -d 'the other case to test' -r
 complete -c my-app -n "__fish_my_app_using_subcommand some_cmd" -s h -l help -d 'Print help'
 complete -c my-app -n "__fish_my_app_using_subcommand some_cmd" -s V -l version -d 'Print version'
-complete -c my-app -n "__fish_my_app_using_subcommand some-cmd-with-hyphens; and not __fish_seen_subcommand_from some-nested-hidden-cmd help" -l verbose
 complete -c my-app -n "__fish_my_app_using_subcommand some-cmd-with-hyphens; and not __fish_seen_subcommand_from some-nested-hidden-cmd help" -s h -l help -d 'Print help'
 complete -c my-app -n "__fish_my_app_using_subcommand some-cmd-with-hyphens; and not __fish_seen_subcommand_from some-nested-hidden-cmd help" -s V -l version -d 'Print version'
-complete -c my-app -n "__fish_my_app_using_subcommand some-cmd-with-hyphens; and not __fish_seen_subcommand_from some-nested-hidden-cmd help" -a "some-nested-hidden-cmd"
 complete -c my-app -n "__fish_my_app_using_subcommand some-cmd-with-hyphens; and not __fish_seen_subcommand_from some-nested-hidden-cmd help" -a "help" -d 'Print this message or the help of the given subcommand(s)'
 complete -c my-app -n "__fish_my_app_using_subcommand some-cmd-with-hyphens; and __fish_seen_subcommand_from some-nested-hidden-cmd" -s h -l help -d 'Print help'
 complete -c my-app -n "__fish_my_app_using_subcommand some-cmd-with-hyphens; and __fish_seen_subcommand_from some-nested-hidden-cmd" -s V -l version -d 'Print version'
-complete -c my-app -n "__fish_my_app_using_subcommand some-cmd-with-hyphens; and __fish_seen_subcommand_from help" -f -a "some-nested-hidden-cmd"
 complete -c my-app -n "__fish_my_app_using_subcommand some-cmd-with-hyphens; and __fish_seen_subcommand_from help" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
 complete -c my-app -n "__fish_my_app_using_subcommand some-hidden-cmd" -s h -l help -d 'Print help'
 complete -c my-app -n "__fish_my_app_using_subcommand some-hidden-cmd" -s V -l version -d 'Print version'
 complete -c my-app -n "__fish_my_app_using_subcommand help; and not __fish_seen_subcommand_from test some_cmd some-cmd-with-hyphens some-hidden-cmd help" -f -a "test" -d 'tests things'
 complete -c my-app -n "__fish_my_app_using_subcommand help; and not __fish_seen_subcommand_from test some_cmd some-cmd-with-hyphens some-hidden-cmd help" -f -a "some_cmd" -d 'tests other things'
 complete -c my-app -n "__fish_my_app_using_subcommand help; and not __fish_seen_subcommand_from test some_cmd some-cmd-with-hyphens some-hidden-cmd help" -f -a "some-cmd-with-hyphens"
-complete -c my-app -n "__fish_my_app_using_subcommand help; and not __fish_seen_subcommand_from test some_cmd some-cmd-with-hyphens some-hidden-cmd help" -f -a "some-hidden-cmd"
 complete -c my-app -n "__fish_my_app_using_subcommand help; and not __fish_seen_subcommand_from test some_cmd some-cmd-with-hyphens some-hidden-cmd help" -f -a "help" -d 'Print this message or the help of the given subcommand(s)'
-complete -c my-app -n "__fish_my_app_using_subcommand help; and __fish_seen_subcommand_from some-cmd-with-hyphens" -f -a "some-nested-hidden-cmd"

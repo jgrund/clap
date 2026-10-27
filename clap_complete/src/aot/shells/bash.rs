@@ -286,7 +286,7 @@ fn all_options_for_path(cmd: &Command, path: &str) -> String {
     for long in utils::longs_and_visible_aliases(p) {
         write!(&mut opts, "--{long} ").expect("writing to String is infallible");
     }
-    for pos in p.get_positionals() {
+    for pos in p.get_positionals().filter(|a| !a.is_hide_set()) {
         if let Some(vals) = utils::possible_values(pos) {
             for value in vals {
                 write!(&mut opts, "{} ", value.get_name())
@@ -298,7 +298,11 @@ fn all_options_for_path(cmd: &Command, path: &str) -> String {
         // bash glob-expand the brackets (#6407), so leave it to the `-o default`
         // (filename) fallback instead.
     }
-    for (sc, _) in utils::subcommands(p) {
+    for sc in p
+        .get_subcommands()
+        .filter(|sc| !sc.is_hide_set())
+        .flat_map(Command::get_name_and_visible_aliases)
+    {
         write!(&mut opts, "{sc} ").expect("writing to String is infallible");
     }
     opts.pop();

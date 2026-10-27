@@ -45,7 +45,6 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (some_cmd)
 _arguments "${_arguments_options[@]}" : \
-'--config=[the other case to test]: :_default' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
@@ -55,7 +54,6 @@ _arguments "${_arguments_options[@]}" : \
 ;;
 (some-cmd-with-hyphens)
 _arguments "${_arguments_options[@]}" : \
-'--verbose[]' \
 '-h[Print help]' \
 '--help[Print help]' \
 '-V[Print version]' \
@@ -178,7 +176,6 @@ _my-app_commands() {
 'test:tests things' \
 'some_cmd:tests other things' \
 'some-cmd-with-hyphens:' \
-'some-hidden-cmd:' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'my-app commands' commands "$@"
@@ -189,7 +186,6 @@ _my-app__subcmd__help_commands() {
 'test:tests things' \
 'some_cmd:tests other things' \
 'some-cmd-with-hyphens:' \
-'some-hidden-cmd:' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'my-app help commands' commands "$@"
@@ -201,9 +197,7 @@ _my-app__subcmd__help__subcmd__help_commands() {
 }
 (( $+functions[_my-app__subcmd__help__subcmd__some-cmd-with-hyphens_commands] )) ||
 _my-app__subcmd__help__subcmd__some-cmd-with-hyphens_commands() {
-    local commands; commands=(
-'some-nested-hidden-cmd:' \
-    )
+    local commands; commands=()
     _describe -t commands 'my-app help some-cmd-with-hyphens commands' commands "$@"
 }
 (( $+functions[_my-app__subcmd__help__subcmd__some-cmd-with-hyphens__subcmd__some-nested-hidden-cmd_commands] )) ||
@@ -229,7 +223,6 @@ _my-app__subcmd__help__subcmd__test_commands() {
 (( $+functions[_my-app__subcmd__some-cmd-with-hyphens_commands] )) ||
 _my-app__subcmd__some-cmd-with-hyphens_commands() {
     local commands; commands=(
-'some-nested-hidden-cmd:' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'my-app some-cmd-with-hyphens commands' commands "$@"
@@ -237,7 +230,6 @@ _my-app__subcmd__some-cmd-with-hyphens_commands() {
 (( $+functions[_my-app__subcmd__some-cmd-with-hyphens__subcmd__help_commands] )) ||
 _my-app__subcmd__some-cmd-with-hyphens__subcmd__help_commands() {
     local commands; commands=(
-'some-nested-hidden-cmd:' \
 'help:Print this message or the help of the given subcommand(s)' \
     )
     _describe -t commands 'my-app some-cmd-with-hyphens help commands' commands "$@"

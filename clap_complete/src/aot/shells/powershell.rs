@@ -91,7 +91,7 @@ fn generate_inner(p: &Command, previous_command_name: &str) -> String {
     let mut completions = String::new();
     let preamble = String::from("\n            [CompletionResult]::new(");
 
-    for option in p.get_opts() {
+    for option in p.get_opts().filter(|a| !a.is_hide_set()) {
         generate_aliases(&mut completions, &preamble, option);
     }
 
@@ -99,7 +99,7 @@ fn generate_inner(p: &Command, previous_command_name: &str) -> String {
         generate_aliases(&mut completions, &preamble, &flag);
     }
 
-    for subcommand in p.get_subcommands() {
+    for subcommand in p.get_subcommands().filter(|sc| !sc.is_hide_set()) {
         for name in subcommand.get_name_and_visible_aliases() {
             let tooltip = escape_help(subcommand.get_about(), name);
             completions.push_str(&preamble);

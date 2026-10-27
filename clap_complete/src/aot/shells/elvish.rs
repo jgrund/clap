@@ -83,7 +83,7 @@ fn generate_inner(p: &Command, previous_command_name: &str) -> String {
     let mut completions = String::new();
     let preamble = String::from("\n            cand ");
 
-    for option in p.get_opts() {
+    for option in p.get_opts().filter(|a| !a.is_hide_set()) {
         if let Some(shorts) = option.get_short_and_visible_aliases() {
             let tooltip = escape_help(option.get_help(), shorts[0]);
             for short in shorts {
@@ -119,7 +119,7 @@ fn generate_inner(p: &Command, previous_command_name: &str) -> String {
         }
     }
 
-    for subcommand in p.get_subcommands() {
+    for subcommand in p.get_subcommands().filter(|sc| !sc.is_hide_set()) {
         for name in subcommand.get_name_and_visible_aliases() {
             let tooltip = escape_help(subcommand.get_about(), name);
 

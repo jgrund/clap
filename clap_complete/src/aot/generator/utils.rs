@@ -71,6 +71,7 @@ pub fn shorts_and_visible_aliases(p: &Command) -> Vec<char> {
     debug!("shorts: name={}", p.get_name());
 
     p.get_arguments()
+        .filter(|a| !a.is_hide_set())
         .filter_map(|a| {
             if !a.is_positional() {
                 if a.get_visible_short_aliases().is_some() && a.get_short().is_some() {
@@ -96,6 +97,7 @@ pub fn longs_and_visible_aliases(p: &Command) -> Vec<String> {
     debug!("longs: name={}", p.get_name());
 
     p.get_arguments()
+        .filter(|a| !a.is_hide_set())
         .filter_map(|a| {
             if !a.is_positional() {
                 if a.get_visible_aliases().is_some() && a.get_long().is_some() {
@@ -125,7 +127,11 @@ pub fn longs_and_visible_aliases(p: &Command) -> Vec<String> {
 pub fn flags(p: &Command) -> Vec<Arg> {
     debug!("flags: name={}", p.get_name());
     p.get_arguments()
-        .filter(|a| !a.get_num_args().expect("built").takes_values() && !a.is_positional())
+        .filter(|a| {
+            !a.get_num_args().expect("built").takes_values()
+                && !a.is_positional()
+                && !a.is_hide_set()
+        })
         .cloned()
         .collect()
 }

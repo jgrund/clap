@@ -169,7 +169,7 @@ fn subcommands_of(p: &Command) -> String {
     }
 
     // The subcommands
-    for command in p.get_subcommands() {
+    for command in p.get_subcommands().filter(|sc| !sc.is_hide_set()) {
         debug!("subcommands_of:iter: subcommand={}", command.get_name());
 
         add_subcommands(command, command.get_name(), &mut segments);
@@ -459,7 +459,7 @@ fn write_opts_of(p: &Command, p_global: Option<&Command>) -> String {
 
     let mut ret = vec![];
 
-    for o in p.get_opts() {
+    for o in p.get_opts().filter(|a| !a.is_hide_set()) {
         debug!("write_opts_of:iter: o={}", o.get_id());
 
         let help = escape_help(&o.get_help().unwrap_or_default().to_string());

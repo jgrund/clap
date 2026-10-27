@@ -32,7 +32,6 @@ Register-ArgumentCompleter -Native -CommandName 'my-app' -ScriptBlock {
             [CompletionResult]::new('test', 'test', [CompletionResultType]::ParameterValue, 'tests things')
             [CompletionResult]::new('some_cmd', 'some_cmd', [CompletionResultType]::ParameterValue, 'tests other things')
             [CompletionResult]::new('some-cmd-with-hyphens', 'some-cmd-with-hyphens', [CompletionResultType]::ParameterValue, 'some-cmd-with-hyphens')
-            [CompletionResult]::new('some-hidden-cmd', 'some-hidden-cmd', [CompletionResultType]::ParameterValue, 'some-hidden-cmd')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
             break
         }
@@ -45,7 +44,6 @@ Register-ArgumentCompleter -Native -CommandName 'my-app' -ScriptBlock {
             break
         }
         'my-app;some_cmd' {
-            [CompletionResult]::new('--config', '--config', [CompletionResultType]::ParameterName, 'the other case to test')
             [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
             [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
             [CompletionResult]::new('-V', '-V ', [CompletionResultType]::ParameterName, 'Print version')
@@ -53,12 +51,10 @@ Register-ArgumentCompleter -Native -CommandName 'my-app' -ScriptBlock {
             break
         }
         'my-app;some-cmd-with-hyphens' {
-            [CompletionResult]::new('--verbose', '--verbose', [CompletionResultType]::ParameterName, 'verbose')
             [CompletionResult]::new('-h', '-h', [CompletionResultType]::ParameterName, 'Print help')
             [CompletionResult]::new('--help', '--help', [CompletionResultType]::ParameterName, 'Print help')
             [CompletionResult]::new('-V', '-V ', [CompletionResultType]::ParameterName, 'Print version')
             [CompletionResult]::new('--version', '--version', [CompletionResultType]::ParameterName, 'Print version')
-            [CompletionResult]::new('some-nested-hidden-cmd', 'some-nested-hidden-cmd', [CompletionResultType]::ParameterValue, 'some-nested-hidden-cmd')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
             break
         }
@@ -70,7 +66,6 @@ Register-ArgumentCompleter -Native -CommandName 'my-app' -ScriptBlock {
             break
         }
         'my-app;some-cmd-with-hyphens;help' {
-            [CompletionResult]::new('some-nested-hidden-cmd', 'some-nested-hidden-cmd', [CompletionResultType]::ParameterValue, 'some-nested-hidden-cmd')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
             break
         }
@@ -91,7 +86,6 @@ Register-ArgumentCompleter -Native -CommandName 'my-app' -ScriptBlock {
             [CompletionResult]::new('test', 'test', [CompletionResultType]::ParameterValue, 'tests things')
             [CompletionResult]::new('some_cmd', 'some_cmd', [CompletionResultType]::ParameterValue, 'tests other things')
             [CompletionResult]::new('some-cmd-with-hyphens', 'some-cmd-with-hyphens', [CompletionResultType]::ParameterValue, 'some-cmd-with-hyphens')
-            [CompletionResult]::new('some-hidden-cmd', 'some-hidden-cmd', [CompletionResultType]::ParameterValue, 'some-hidden-cmd')
             [CompletionResult]::new('help', 'help', [CompletionResultType]::ParameterValue, 'Print this message or the help of the given subcommand(s)')
             break
         }
@@ -102,7 +96,6 @@ Register-ArgumentCompleter -Native -CommandName 'my-app' -ScriptBlock {
             break
         }
         'my-app;help;some-cmd-with-hyphens' {
-            [CompletionResult]::new('some-nested-hidden-cmd', 'some-nested-hidden-cmd', [CompletionResultType]::ParameterValue, 'some-nested-hidden-cmd')
             break
         }
         'my-app;help;some-cmd-with-hyphens;some-nested-hidden-cmd' {
